@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.25 FATAL_ERROR)
 #Define your projet
 #See: https://cmake.org/cmake/help/latest/command/project.html
 project(
-    "FirstProjectInCMake"
+    "DynamicCLib"
     VERSION 1.1.0
     DESCRIPTION "CMake C Project Template for Operating System II"
     LANGUAGES C
@@ -24,19 +24,5 @@ include_directories(include)
 file(GLOB_RECURSE SOURCES "src/*.c")
 
 #Create the executable
-#See: https://cmake.org/cmake/help/latest/command/add_executable.html
-add_executable(${PROJECT_NAME} ${SOURCES})
-
-#Compile the libraries
-#See: https://cmake.org/cmake/help/latest/command/add_subdirectory.html
-add_subdirectory(lib/libdyn)
-add_subdirectory(lib/libsta)
-
-#Include headers in Lib
-#See: https://cmake.org/cmake/help/latest/command/target_include_directories.html
-target_include_directories(${PROJECT_NAME} PUBLIC lib/libdyn/include)
-target_include_directories(${PROJECT_NAME} PUBLIC lib/libsta/include)
-
-#Link the libraries
-#See: https://cmake.org/cmake/help/latest/command/target_link_libraries.html
-target_link_libraries(${PROJECT_NAME} StaticCLib DynamicCLib)
+#See: https://cmake.org/cmake/help/latest/command/add_library.html
+add_library(${PROJECT_NAME} SHARED ${SOURCES})
