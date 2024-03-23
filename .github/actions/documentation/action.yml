@@ -11,6 +11,8 @@ runs:
           DOX_CONF_FILE=$(pwd)/Doxyfile
 
           # ToDo: Add documentation about this command and describe better
+          # This add the src file path to the Doxyfile
+          # the line echo adds the source directory
           {
               cat $DOX_CONF_FILE
               echo "INPUT" = $(pwd)/src $(pwd)/include $(pwd)/lib
@@ -18,11 +20,14 @@ runs:
 
           # Generate documentation
           # ToDo: Add documentation about this command and describe better
+          # This line ejecute with superuser permission the command dot
           sudo dot -c
 
           ERROR_FILE_FLAG=$(pwd)/dox_errors.txt
 
           # ToDo: Add documentation and describe better this command
+          # ejecute the command doxygen with the option -s, that option dont generate a output progress in the screen
+          # the output of command is save in ERROR_FILE_FLAG
           DOXYGEN_COMMAND=$(doxygen -s $DOX_CONF_FILE) > $ERROR_FILE_FLAG
 
           if [ -s $ERROR_FILE_FLAG ]; then

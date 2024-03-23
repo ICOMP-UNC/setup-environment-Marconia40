@@ -10,11 +10,16 @@ runs:
         PROJECT_PATH=$(pwd)
 
         # ToDo: Add documentation and describe better this command
+        # This command generate a output if the test fail
+        # the --test-dir specify the path where are include the test
+        # See: https://cmake.org/cmake/help/latest/manual/ctest.1.html
         ctest --test-dir build/tests --output-on-failure
 
         # ToDo: Add documentation and describe better this command
-
-
+        # This command using gcovr generate a coverage report
+        # option -r is the root directory of source files ($PROJECT_PATH .) where . is the current directory
+        # Report is save in the file coverage.txt 
+        # See: man gcovr in terminal
         gcovr -r $PROJECT_PATH . > $PROJECT_PATH/coverage.txt
 
         echo "Runnig: gcovr -r $PROJECT_PATH ."
@@ -23,9 +28,13 @@ runs:
 
         # Find the value of correct coverage
         # ToDo: Add documentation and describe better this command
+        # This command save the result of the percent of TOTAL Coverage
+        # The value is obtained from the file coverage.txt in the line that include TOTAL
+        # Just before symbol %.
         COVERAGE_RESULT=$(grep "TOTAL" $PROJECT_PATH/coverage.txt | awk '{print $NF}' | cut -d '%' -f 1)
 
         # Coverage lines GT 20
+        # This compare the value of COVERAGE_RESULT with the minimum percent of coverage permit.
         if [ "$(echo "$COVERAGE_RESULT > 20" | bc)" -eq 1 ]; then
             echo "Coverage is greater than 20%. Nice!"
             exit 0
