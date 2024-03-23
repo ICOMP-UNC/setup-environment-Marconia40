@@ -1,5 +1,5 @@
 #include <unity.h>
-#include <logic.h>
+#include "logic.h"
 
 void test_logic_add(void)
 {

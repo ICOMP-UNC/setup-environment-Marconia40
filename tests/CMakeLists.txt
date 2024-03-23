@@ -6,7 +6,7 @@ cmake_minimum_required(VERSION 3.25 FATAL_ERROR)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../include)
 
 #Collect test
-file(GLOB TEST_FILES ${CMAKE_CURRENT_SOURCE_DIR}/unit/*.c)
+file(GLOB TESTS_FILES ${CMAKE_CURRENT_SOURCE_DIR}/unit/*.c)
 file(GLOB SRC_FILES ${CMAKE_CURRENT_SOURCE_DIR}/../src/logic.c)
 
 #Link with Unity header
@@ -42,4 +42,4 @@ target_link_libraries(test_${PROJECT_NAME} unity)
 
 #add test
 #See: https://cmake.org/cmake/help/latest/command/add_test.html
-add_test(NAME test_${PROJECT_NAME} COMMAND test_{PROJECT_NAME})
+add_test(NAME test_${PROJECT_NAME} COMMAND test_${PROJECT_NAME})
